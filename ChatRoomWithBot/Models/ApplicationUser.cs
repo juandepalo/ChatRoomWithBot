@@ -8,5 +8,6 @@ namespace ChatRoomWithBot.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string NickName { get; set; }
     }
 }
