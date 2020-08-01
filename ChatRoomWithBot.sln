@@ -3,7 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatRoomWithBot", "ChatRoomWithBot\ChatRoomWithBot.csproj", "{26B0EBE7-6AA0-48C2-A723-0BF4A2197A18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatRoomWithBot", "ChatRoomWithBot\ChatRoomWithBot.csproj", "{26B0EBE7-6AA0-48C2-A723-0BF4A2197A18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChatBot", "ChatBot", "{F70E77CC-CE79-4291-832D-FD0DD182754C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{220C4F9C-3A83-47F5-AA3C-C75069C926A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{4BDD1775-E3F7-49B4-B93E-D219AE79F986}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatRoom.ChatBot", "ChatBot\ChatRoom.ChatBot\ChatRoom.ChatBot.csproj", "{76D33E04-AC6C-4326-A96A-5DFD229F650B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatRoom.ChatBot.Domain", "ChatBot\ChatRoom.ChatBot.Domain\ChatRoom.ChatBot.Domain.csproj", "{97D39C3F-BBE2-465F-BB3E-870FFDB00DD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatRoom.Domain", "Core\ChatRoom.Domain\ChatRoom.Domain.csproj", "{EF81F4BD-3F45-496B-A55A-3A2587728612}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EE6C34C5-D837-441E-B91E-3264409FDEB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatRoom.Persistence", "Data\ChatRoom.Persistence\ChatRoom.Persistence.csproj", "{3AAAA2DD-B82B-4CEE-ADE6-6F5833F19744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatRoom.Application", "Core\ChatRoom.Application\ChatRoom.Application.csproj", "{60976A0B-96E7-4F90-A325-C227A9DBBD20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatRoom.NUnitTest", "Test\ChatRoom.NUnitTest\ChatRoom.NUnitTest.csproj", "{E4858C99-E752-4AE9-B47E-D6D03EF6EB44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +35,41 @@ Global
 		{26B0EBE7-6AA0-48C2-A723-0BF4A2197A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26B0EBE7-6AA0-48C2-A723-0BF4A2197A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26B0EBE7-6AA0-48C2-A723-0BF4A2197A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D33E04-AC6C-4326-A96A-5DFD229F650B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D33E04-AC6C-4326-A96A-5DFD229F650B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D33E04-AC6C-4326-A96A-5DFD229F650B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D33E04-AC6C-4326-A96A-5DFD229F650B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D39C3F-BBE2-465F-BB3E-870FFDB00DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D39C3F-BBE2-465F-BB3E-870FFDB00DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D39C3F-BBE2-465F-BB3E-870FFDB00DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D39C3F-BBE2-465F-BB3E-870FFDB00DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF81F4BD-3F45-496B-A55A-3A2587728612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF81F4BD-3F45-496B-A55A-3A2587728612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF81F4BD-3F45-496B-A55A-3A2587728612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF81F4BD-3F45-496B-A55A-3A2587728612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AAAA2DD-B82B-4CEE-ADE6-6F5833F19744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AAAA2DD-B82B-4CEE-ADE6-6F5833F19744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AAAA2DD-B82B-4CEE-ADE6-6F5833F19744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AAAA2DD-B82B-4CEE-ADE6-6F5833F19744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60976A0B-96E7-4F90-A325-C227A9DBBD20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60976A0B-96E7-4F90-A325-C227A9DBBD20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60976A0B-96E7-4F90-A325-C227A9DBBD20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60976A0B-96E7-4F90-A325-C227A9DBBD20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4858C99-E752-4AE9-B47E-D6D03EF6EB44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4858C99-E752-4AE9-B47E-D6D03EF6EB44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4858C99-E752-4AE9-B47E-D6D03EF6EB44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4858C99-E752-4AE9-B47E-D6D03EF6EB44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{76D33E04-AC6C-4326-A96A-5DFD229F650B} = {F70E77CC-CE79-4291-832D-FD0DD182754C}
+		{97D39C3F-BBE2-465F-BB3E-870FFDB00DD8} = {F70E77CC-CE79-4291-832D-FD0DD182754C}
+		{EF81F4BD-3F45-496B-A55A-3A2587728612} = {220C4F9C-3A83-47F5-AA3C-C75069C926A9}
+		{3AAAA2DD-B82B-4CEE-ADE6-6F5833F19744} = {4BDD1775-E3F7-49B4-B93E-D219AE79F986}
+		{60976A0B-96E7-4F90-A325-C227A9DBBD20} = {220C4F9C-3A83-47F5-AA3C-C75069C926A9}
+		{E4858C99-E752-4AE9-B47E-D6D03EF6EB44} = {EE6C34C5-D837-441E-B91E-3264409FDEB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {537B83F1-4A01-4188-8B4F-7703F3E636A1}
