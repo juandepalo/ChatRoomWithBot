@@ -1,5 +1,7 @@
 ﻿using ChatRoom.Application.Interfaces;
+using ChatRoom.Domain;
 using ChatRoom.Persistence.Repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,9 +20,24 @@ namespace ChatRoom.Persistence
 
             services.AddScoped<IChatRoomDbContext>(provider => provider.GetService<ChatRoomDbContext>());
 
+
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             return services;
+        }
+
+        public static void UpdateDatabase(this IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
+            .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ChatRoomDbContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

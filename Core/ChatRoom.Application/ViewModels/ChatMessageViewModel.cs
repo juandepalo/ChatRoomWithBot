@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ChatRoom.Application.ViewModels
 {
-    class ChatMessageViewModel
+    public class ChatMessageViewModel
     {
+        public string NickName { get; set; }
+        public string Message { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

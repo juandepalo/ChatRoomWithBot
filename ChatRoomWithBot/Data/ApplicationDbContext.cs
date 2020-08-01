@@ -1,4 +1,5 @@
-﻿using ChatRoomWithBot.Models;
+﻿
+using ChatRoom.Domain;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
