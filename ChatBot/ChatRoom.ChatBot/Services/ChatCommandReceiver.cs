@@ -1,4 +1,5 @@
 ﻿using ChatRoom.ChatBot.Domain;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -14,11 +15,13 @@ namespace ChatRoom.ChatBot.Services
         private IConnection connection { get; set; }
         private IModel channel { get; set; }
 
+        private readonly ILogger _logger;
         private readonly BotService _botService;
         private readonly RabbitMQSettings _rabbitMQSettings;
 
-        public ChatCommandReceiver(BotService botService, IOptions<RabbitMQSettings> settings)
+        public ChatCommandReceiver(ILogger<ChatCommandReceiver> logger, BotService botService, IOptions<RabbitMQSettings> settings)
         {
+            _logger = logger;
             _rabbitMQSettings = settings.Value;
 
             factory = new ConnectionFactory()
@@ -47,7 +50,7 @@ namespace ChatRoom.ChatBot.Services
                 var body = ea.Body;
                 var message = Encoding.UTF8.GetString(body.ToArray());
 
-                Console.WriteLine(" [x] Received command {0}", message);
+                _logger.LogInformation(" [x] Received command {0}", message);
 
                 _botService.HandleCommand(message);
             };

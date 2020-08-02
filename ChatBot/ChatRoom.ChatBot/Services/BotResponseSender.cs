@@ -1,4 +1,5 @@
 ﻿using ChatRoom.ChatBot.Domain;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -12,8 +13,10 @@ namespace ChatRoom.ChatBot.Services
     {
         private readonly RabbitMQSettings _rabbitMQSettings;
 
-        public BotResponseSender(IOptions<RabbitMQSettings> settings)
+        private readonly ILogger _logger;
+        public BotResponseSender(IOptions<RabbitMQSettings> settings, ILogger<BotResponseSender> logger)
         {
+            _logger = logger;
             _rabbitMQSettings = settings.Value;
         }
 
@@ -38,7 +41,7 @@ namespace ChatRoom.ChatBot.Services
                                      basicProperties: null,
                                      body: responseBody);
 
-                Console.WriteLine(" [x] Sent {0}", serializedBotResponse);
+                _logger.LogInformation(" [x] Sent {0}", serializedBotResponse);
             }
         }
     }

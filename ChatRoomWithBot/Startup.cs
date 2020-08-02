@@ -78,6 +78,7 @@ namespace ChatRoomWithBot
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
@@ -111,6 +112,7 @@ namespace ChatRoomWithBot
                 }
             });
 
+            app.UseRabbitListener();
         }
     }
 }
