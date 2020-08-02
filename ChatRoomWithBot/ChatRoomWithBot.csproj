@@ -40,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\ChatRoom.ComService\ChatRoom.ComService.csproj" />
     <ProjectReference Include="..\Data\ChatRoom.Persistence\ChatRoom.Persistence.csproj" />
   </ItemGroup>
 

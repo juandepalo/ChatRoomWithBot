@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using ChatRoom.Domain;
 using ChatRoom.Persistence;
 using ChatRoom.Application;
+using ChatRoom.ComService;
 
 namespace ChatRoomWithBot
 {
@@ -51,6 +52,8 @@ namespace ChatRoomWithBot
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddComService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +91,8 @@ namespace ChatRoomWithBot
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapHub<ChatRoomHub>("/chatroom-events");
             });
 
             app.UseSpa(spa =>
@@ -102,6 +107,7 @@ namespace ChatRoomWithBot
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
         }
     }
 }
