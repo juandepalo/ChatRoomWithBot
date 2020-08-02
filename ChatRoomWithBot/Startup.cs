@@ -14,6 +14,7 @@ using ChatRoom.Domain;
 using ChatRoom.Persistence;
 using ChatRoom.Application;
 using ChatRoom.ComService;
+using ChatRoom.ChatBot.Domain;
 
 namespace ChatRoomWithBot
 {
@@ -54,6 +55,8 @@ namespace ChatRoomWithBot
             });
 
             services.AddComService();
+
+            services.Configure<RabbitMQSettings>(Configuration.GetSection("RabbitMQ"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,6 +12,8 @@ namespace ChatRoom.ComService
 
             services.AddSignalR();
 
+            services.AddSingleton<BotResponseReceiver>();
+
             return services;
         }
     }
