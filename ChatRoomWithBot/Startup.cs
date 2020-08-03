@@ -16,6 +16,8 @@ using ChatRoom.Application;
 using ChatRoom.ComService;
 using ChatRoom.ChatBot.Domain;
 using System;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.OpenApi.Models;
 
 namespace ChatRoomWithBot
 {
@@ -36,6 +38,10 @@ namespace ChatRoomWithBot
             //        Configuration.GetConnectionString("DefaultConnection")));
 
 
+            services.AddHttpContextAccessor();
+
+            services.AddSession();
+
             services.AddPersistence(Configuration);
             services.AddApplication();
 
@@ -48,7 +54,6 @@ namespace ChatRoomWithBot
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
-            services.AddHttpContextAccessor();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -61,6 +66,11 @@ namespace ChatRoomWithBot
             services.AddComService();
 
             services.Configure<RabbitMQSettings>(Configuration.GetSection("RabbitMQ"));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Chat Room API"});
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,6 +103,9 @@ namespace ChatRoomWithBot
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
+
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -117,8 +130,16 @@ namespace ChatRoomWithBot
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
+            
+            //app.UseCors(CorsOptions.AllowAll);
             app.UseRabbitListener();
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Chat Room API");
+                c.RoutePrefix = "help";
+            });
         }
     }
 }

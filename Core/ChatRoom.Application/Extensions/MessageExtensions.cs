@@ -24,19 +24,18 @@ namespace ChatRoom.Application.Extensions
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(
-                    queue: rabbitMQSettings.BotBrokerQueue.Name,
-                    durable: rabbitMQSettings.BotBrokerQueue.Durable,
-                    exclusive: rabbitMQSettings.BotBrokerQueue.Exclusive,
-                    autoDelete: rabbitMQSettings.BotBrokerQueue.AutoDelete,
+                    queue: rabbitMQSettings.BotBundleQueue.Name,
+                    durable: rabbitMQSettings.BotBundleQueue.Durable,
+                    exclusive: rabbitMQSettings.BotBundleQueue.Exclusive,
+                    autoDelete: rabbitMQSettings.BotBundleQueue.AutoDelete,
                     arguments: null);
 
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish(exchange: "",
-                                     routingKey: rabbitMQSettings.BotBrokerQueue.Name,
+                                     routingKey: rabbitMQSettings.BotBundleQueue.Name,
                                      basicProperties: null,
                                      body: body);
-                Console.WriteLine(" [x] Sent {0}", message);
             }
         }
     }

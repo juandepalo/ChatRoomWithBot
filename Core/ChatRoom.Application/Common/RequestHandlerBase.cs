@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ChatRoom.Application
+namespace ChatRoom.Application.Common
 {
     public class RequestHandlerBase
     {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ChatRoom.Application.Behaviors;
+using ChatRoom.Application.Common;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,9 +16,10 @@ namespace ChatRoom.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
+            services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddLogging();
 
             return services;

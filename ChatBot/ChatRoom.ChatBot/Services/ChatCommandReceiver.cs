@@ -38,10 +38,10 @@ namespace ChatRoom.ChatBot.Services
         public void Register()
         {
             channel.QueueDeclare(
-                queue: _rabbitMQSettings.BotBrokerQueue.Name,
-                durable: _rabbitMQSettings.BotBrokerQueue.Durable,
-                exclusive: _rabbitMQSettings.BotBrokerQueue.Exclusive,
-                autoDelete: _rabbitMQSettings.BotBrokerQueue.AutoDelete,
+                queue: _rabbitMQSettings.BotBundleQueue.Name,
+                durable: _rabbitMQSettings.BotBundleQueue.Durable,
+                exclusive: _rabbitMQSettings.BotBundleQueue.Exclusive,
+                autoDelete: _rabbitMQSettings.BotBundleQueue.AutoDelete,
                 arguments: null);
 
             var consumer = new EventingBasicConsumer(channel);
@@ -54,7 +54,7 @@ namespace ChatRoom.ChatBot.Services
 
                 _botService.HandleCommand(message);
             };
-            channel.BasicConsume(queue: _rabbitMQSettings.BotBrokerQueue.Name,
+            channel.BasicConsume(queue: _rabbitMQSettings.BotBundleQueue.Name,
                                  autoAck: true,
                                  consumer: consumer);
         }

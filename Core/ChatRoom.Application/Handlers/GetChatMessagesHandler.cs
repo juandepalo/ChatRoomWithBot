@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using ChatRoom.Application.Queries;
 using System.Runtime.InteropServices.WindowsRuntime;
+using ChatRoom.Application.Common;
 
 namespace ChatRoom.Application.Handlers
 {

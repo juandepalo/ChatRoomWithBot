@@ -6,7 +6,8 @@ import { ChatRoomService } from '../../services/chatroom.service';
 
 @Component({
   selector: 'chat-room',
-  templateUrl: './chat-room.component.html'
+  templateUrl: './chat-room.component.html',
+  styleUrls: ['./chat-room.component.css']
 })
 export class ChatRoomComponent implements OnInit {
   public chatMessages: ChatMessageModel[];
@@ -22,8 +23,14 @@ export class ChatRoomComponent implements OnInit {
     private _ngZone: NgZone
   ) {
     this._baseUrl = baseUrl;
+
     this.currentDT = new Date();
+
+    this.currentDT.setDate(this.currentDT.getDate() - 1);
+
+    console.log(this.currentDT)
     this.subscribeToEvents();
+
     http.get<ChatMessageModel[]>(this._baseUrl + 'api/chats/getmessages').subscribe(result => {
       this.chatMessages = result;
     }, error => console.error(error));

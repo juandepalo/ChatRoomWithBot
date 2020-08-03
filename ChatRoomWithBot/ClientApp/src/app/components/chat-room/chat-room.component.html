@@ -3,21 +3,40 @@
   &nbsp;
 </div>
 
-<div id="chat">
-  <ul id="messages">
-    <li *ngFor="let message of chatMessages">
-      <span *ngIf="message.creationDate>currentDT">[{{ message.creationDate | date: 'shortTime' }}] - </span>
-      <span *ngIf="message.creationDate<=currentDT">[{{ message.creationDate | date: 'short' }}] - </span>
-      <strong> {{ message.nickName }}: </strong>
-      <em>{{ message.message }}</em>
-    </li>
+<div id="chat" class="container">
+  <h3 class=" text-center chat_header">Chat Room</h3>
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="mesgs">
+        <div id="messages" class="msg_history">
+          <div *ngFor="let message of chatMessages ; let i = index">
+            <div class="incoming_msg">
+              <div class="incoming_msg_img"> </div>
+              <div class="received_msg" id="{{'msg_' + i}}">
+                <div class="received_withd_msg">
+                  <em> {{ message.nickName }}: </em>
+                  <p>
+                    {{message.message}}
+                  </p>
+                  <span class="time_date"> {{ (currentDT > message.creationDate) ? (message.creationDate | date: 'short') : ( message.creationDate | date: 'shortTime') }} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="type_msg">
+          <form id="frm-send-message" [formGroup]="msgForm" (ngSubmit)="sendMessage()">
+            <div class="input_msg_write">
+              <label for="message">Message:</label>
+              <input type="text" id="message" formControlName="message" placeholder="Type your message" autocomplete="off" class="write_msg" />
+              <input type="submit" id="send" value="Send" [disabled]="msgForm.invalid" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
-  </ul>
+  </div>
   <div class="clear">
   </div>
-  <form id="frm-send-message" [formGroup]="msgForm" (ngSubmit)="sendMessage()">
-    <label for="message">Message:</label>
-    <input type="text" id="message" formControlName="message" placeholder="Type your message" autocomplete="off" />
-    <input type="submit" id="send" value="Send" class="send" [disabled]="msgForm.invalid" />
-  </form>
 </div>

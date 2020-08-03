@@ -7,7 +7,7 @@ namespace ChatRoom.ChatBot.Domain
     public class RabbitMQSettings
     {
         public Connection connection { get; set; }
-        public Queue BotBrokerQueue { get; set; }
+        public Queue BotBundleQueue { get; set; }
         public Queue BotResponseQueue { get; set; }
 
         public class Connection

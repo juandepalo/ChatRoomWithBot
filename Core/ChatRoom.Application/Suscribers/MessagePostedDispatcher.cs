@@ -26,8 +26,8 @@ namespace ChatRoom.Application.Suscribers
 
         Task INotificationHandler<MessagePostedEvent>.Handle(MessagePostedEvent @notification, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"Sent to SignalR: {notification.Message} from publisher");
-            notification.CreationDate = DateTime.Now;
+            _logger.LogInformation($" [x] Sent to SignalR: {notification.Message} from notification handler");
+
             return _hubContext.Clients.All.SendAsync("Send", @notification, cancellationToken);
         }
     }
