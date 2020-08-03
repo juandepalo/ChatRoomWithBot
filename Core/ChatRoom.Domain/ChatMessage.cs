@@ -7,7 +7,7 @@ namespace ChatRoom.Domain
     {
         [Key]
         public int Id { get; set; }
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public string Message { get; set; }
         public DateTime CreationDate { get; set; }

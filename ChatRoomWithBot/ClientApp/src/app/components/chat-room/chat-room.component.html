@@ -17,7 +17,7 @@
   </div>
   <form id="frm-send-message" [formGroup]="msgForm" (ngSubmit)="sendMessage()">
     <label for="message">Message:</label>
-    <input type="text" id="message" formControlName="message" placeholder="Type your message" />
+    <input type="text" id="message" formControlName="message" placeholder="Type your message" autocomplete="off" />
     <input type="submit" id="send" value="Send" class="send" [disabled]="msgForm.invalid" />
   </form>
 </div>

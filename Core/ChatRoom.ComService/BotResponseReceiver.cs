@@ -54,7 +54,7 @@ namespace ChatRoom.ComService
 
                 var botResponse = JsonConvert.DeserializeObject<BotResponse>(message);
 
-                _chatRoomHub.Clients.All.SendAsync("Send", botResponse.BotName, botResponse.Message, DateTime.Now);
+                _chatRoomHub.Clients.All.SendAsync("Send", new { NickName = botResponse.BotName, botResponse.Message, CreationDate = DateTime.Now });
                 _logger.LogInformation(" [x] Received {0}", message);
             };
             channel.BasicConsume(queue: _rabbitMQSettings.BotResponseQueue.Name, autoAck: true, consumer: consumer);

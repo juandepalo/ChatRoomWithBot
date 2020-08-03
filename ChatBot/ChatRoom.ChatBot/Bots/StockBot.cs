@@ -35,7 +35,7 @@ namespace ChatRoom.ChatBot.Bots
                 return new BotResponse() { BotName = BotName, Message = string.Format(_notFoundMsg,stockSymbol) };
             }
 
-            return new BotResponse() { BotName = BotName, Message = string.Format(_notFoundMsg, stockSymbol, botResult) };
+            return new BotResponse() { BotName = BotName, Message = string.Format(_stockMsg, stockSymbol, botResult) };
         }
 
         private string runBotActions(string stock_code)
@@ -44,11 +44,12 @@ namespace ChatRoom.ChatBot.Bots
 
             string csvTextFile;
             using (HttpClient httpClient = new HttpClient())
-            using (var response = httpClient.GetStringAsync(stockUrl))
             {
-                csvTextFile = response.Result;
+                using (var response = httpClient.GetStringAsync(stockUrl))
+                {
+                    csvTextFile = response.Result;
+                }
             }
-
             var lines = csvTextFile.Split('\n');
             var stockData = lines[1].Split(',');
             return stockData[6];
