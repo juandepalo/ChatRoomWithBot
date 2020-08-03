@@ -1,0 +1,23 @@
+
+<div class="form-group">
+  &nbsp;
+</div>
+
+<div id="chat">
+  <ul id="messages">
+    <li *ngFor="let message of chatMessages">
+      <span *ngIf="message.creationDate>currentDT">[{{ message.creationDate | date: 'shortTime' }}] - </span>
+      <span *ngIf="message.creationDate<=currentDT">[{{ message.creationDate | date: 'short' }}] - </span>
+      <strong> {{ message.nickName }}: </strong>
+      <em>{{ message.message }}</em>
+    </li>
+
+  </ul>
+  <div class="clear">
+  </div>
+  <form id="frm-send-message" [formGroup]="msgForm" (ngSubmit)="sendMessage()">
+    <label for="message">Message:</label>
+    <input type="text" id="message" formControlName="message" placeholder="Type your message" />
+    <input type="submit" id="send" value="Send" class="send" [disabled]="msgForm.invalid" />
+  </form>
+</div>

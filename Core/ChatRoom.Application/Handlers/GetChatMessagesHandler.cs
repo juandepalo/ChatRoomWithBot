@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using ChatRoom.Application.Queries;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace ChatRoom.Application.Handlers
 {
@@ -25,12 +26,14 @@ namespace ChatRoom.Application.Handlers
 
         async Task<IEnumerable<ChatMessageViewModel>> IRequestHandler<GetChatMessagesQuery, IEnumerable<ChatMessageViewModel>>.Handle(GetChatMessagesQuery request, CancellationToken cancellationToken)
         {
-            return await _chatRepository.GetAll()
-                .Include(c=>c.ApplicationUser)
-                .OrderByDescending(c=> c.CreationDate)
-                .Take(request.MostRecentMessagesQty??50)
+            var messages = await _chatRepository.GetAll()
+                .Include(c => c.ApplicationUser)
+                .OrderByDescending(c => c.CreationDate)
+                .Take(request.MostRecentMessagesQty ?? 50)
                 .ProjectTo<ChatMessageViewModel>(Mapper.ConfigurationProvider)
                 .ToListAsync();
+            messages.Reverse();
+            return messages;
         }
     }
 }

@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace ChatRoom.Application.Handlers
 {
-    public class PostMessageHandler : RequestHandlerBase, IRequestHandler<PostMessageCommand>
+    public class PostMessageHandler : RequestHandlerBase, IRequestHandler<PostMessageCommand, ChatMessageViewModel>
     {
         private readonly IRepository<ChatMessage> _chatRepository;
 
@@ -40,21 +40,27 @@ namespace ChatRoom.Application.Handlers
             _mediator = mediator;
         }
 
-        async Task<Unit> IRequestHandler<PostMessageCommand, Unit>.Handle(PostMessageCommand request, CancellationToken cancellationToken)
+        async Task<ChatMessageViewModel> IRequestHandler<PostMessageCommand, ChatMessageViewModel>.Handle(PostMessageCommand request, CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-
+            ChatMessageViewModel message;
             if (request.Message.IsBotCommand())
             {
                 request.Message.SendToBotBundle(_rabbitMQSettings);
+                message = new ChatMessageViewModel()
+                {
+                    NickName = user?.NickName,
+                    Message = request.Message,
+                    CreationDate = DateTime.Now
+                };
             }
             else
             {
-                var message = await _chatRepository.AddAsync(new ChatMessage { ApplicationUser = user, Message = request.Message, CreationDate = DateTime.Now });
+                message = Mapper.Map<ChatMessageViewModel>(await _chatRepository.AddAsync(new ChatMessage { ApplicationUser = user, Message = request.Message, CreationDate = DateTime.Now }));
 
-                await _mediator.Publish(new MessagePostedEvent(Mapper.Map<ChatMessageViewModel>(message)));
+                await _mediator.Publish(new MessagePostedEvent(message));
             }
-            return Unit.Value;
+            return message;
         }
     }
 }

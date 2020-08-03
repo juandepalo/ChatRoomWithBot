@@ -40,8 +40,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\chat-room\chat-room.component.ts" />
+    <None Remove="ClientApp\src\app\components\page-not-found\page-not-found.component.ts" />
+    <None Remove="ClientApp\src\app\models\chatmessage.model.ts" />
+    <None Remove="ClientApp\src\app\services\chatroom.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core\ChatRoom.ComService\ChatRoom.ComService.csproj" />
     <ProjectReference Include="..\Data\ChatRoom.Persistence\ChatRoom.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\chat-room\chat-room.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\page-not-found\page-not-found.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\chatmessage.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\chatroom.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

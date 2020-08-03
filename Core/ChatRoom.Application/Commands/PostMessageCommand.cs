@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ChatRoom.Application.Commands
 {
-    public class PostMessageCommand : IRequest
+    public class PostMessageCommand : IRequest<ChatMessageViewModel>
     {
         public string Message { get; set; }
     }

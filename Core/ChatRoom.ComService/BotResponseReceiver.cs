@@ -1,5 +1,6 @@
 ﻿using ChatRoom.ChatBot.Domain;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -16,11 +17,13 @@ namespace ChatRoom.ComService
         private IConnection connection { get; set; }
         private IModel channel { get; set; }
 
+        private readonly ILogger _logger;
         private readonly IHubContext<ChatRoomHub> _chatRoomHub;
         private readonly RabbitMQSettings _rabbitMQSettings;
 
-        public BotResponseReceiver(IHubContext<ChatRoomHub> stockChatHub, IOptions<RabbitMQSettings> settings)
+        public BotResponseReceiver(ILogger<BotResponseReceiver> logger, IHubContext<ChatRoomHub> stockChatHub, IOptions<RabbitMQSettings> settings)
         {
+            _logger = logger;
             _rabbitMQSettings = settings.Value;
             _chatRoomHub = stockChatHub;
 
@@ -52,7 +55,7 @@ namespace ChatRoom.ComService
                 var botResponse = JsonConvert.DeserializeObject<BotResponse>(message);
 
                 _chatRoomHub.Clients.All.SendAsync("Send", botResponse.BotName, botResponse.Message, DateTime.Now);
-                Console.WriteLine(" [x] Received {0}", message);
+                _logger.LogInformation(" [x] Received {0}", message);
             };
             channel.BasicConsume(queue: _rabbitMQSettings.BotResponseQueue.Name, autoAck: true, consumer: consumer);
         }

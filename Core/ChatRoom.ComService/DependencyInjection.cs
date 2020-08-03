@@ -1,14 +1,19 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+﻿
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using ChatRoom.ChatBot.Domain;
+using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 
 namespace ChatRoom.ComService
 {
     public static class DependencyInjection
     {
+        private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
         private static BotResponseReceiver _listener { get; set; }
         public static IServiceCollection AddComService(this IServiceCollection services)
         {
@@ -16,6 +21,18 @@ namespace ChatRoom.ComService
             services.AddSignalR();
 
             services.AddSingleton<BotResponseReceiver>();
+
+            //var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}ChatRoomWithBot", Path.DirectorySeparatorChar);
+
+            //var configuration = new ConfigurationBuilder()
+            //    .SetBasePath(basePath)
+            //    .AddJsonFile("appsettings.json")
+            //    .AddJsonFile($"appsettings.Local.json", optional: true)
+            //    .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable(AspNetCoreEnvironment)}.json", optional: true)
+            //    .AddEnvironmentVariables()
+            //                .Build();
+
+            //services.Configure<RabbitMQSettings>(configuration.GetSection("RabbitMQ"));
 
             return services;
         }

@@ -3,6 +3,7 @@ using ChatRoom.ChatBot.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.IO;
 
 namespace ChatRoom.ChatBot
 {
@@ -10,6 +11,7 @@ namespace ChatRoom.ChatBot
     {
         private static IServiceProvider _serviceProvider;
 
+        private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
         static void Main(string[] args)
         {
             RegisterServices();
@@ -33,12 +35,18 @@ namespace ChatRoom.ChatBot
             collection.AddSingleton<BotService>();
 
             var configuration = new ConfigurationBuilder()
-                            .AddJsonFile("appsettings.json")
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.Local.json", optional: true)
+                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable(AspNetCoreEnvironment)}.json", optional: true)
+                .AddEnvironmentVariables()
                             .Build();
 
             collection.Configure<RabbitMQSettings>(configuration.GetSection("RabbitMQ"));
 
             collection.Configure<ChatBotSettings>(configuration.GetSection("ChatBots"));
+            
+            collection.AddLogging();
 
             _serviceProvider = collection.BuildServiceProvider();
         }

@@ -4,7 +4,7 @@ using System;
 
 namespace ChatRoom.ComService
 {
-    [Authorize]
+    //[Authorize]
     public class ChatRoomHub : Hub
     {
     }

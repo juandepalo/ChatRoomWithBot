@@ -15,6 +15,7 @@ using ChatRoom.Persistence;
 using ChatRoom.Application;
 using ChatRoom.ComService;
 using ChatRoom.ChatBot.Domain;
+using System;
 
 namespace ChatRoomWithBot
 {
@@ -105,6 +106,8 @@ namespace ChatRoomWithBot
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
+
+                spa.Options.StartupTimeout = new TimeSpan(0, 30, 0);
 
                 if (env.IsDevelopment())
                 {
