@@ -53,14 +53,14 @@ Database Server, Message Queue Server and Developer SDKs and Tools Requirements 
 
 ### Setup Application
 
-  - For dependencies downloads, restore dotnet nuget pakages and install npm packages in command promt:
+  * For _dependencies downloads_, restore dotnet nuget pakages and install npm packages in command promt:
     ```sh
     cd {Solution Source directory}
     dotnet restore
     cd {Angular ClientApp directory}
     npm install
     ```
-  - For Database, you need to run migrations from data layer project directory:
+  * For _Database deployment_, you need to run migrations from data layer project directory:
     -From terminal:
       ```sh
       cd {ChatRoom.Persistence folder}
@@ -70,10 +70,14 @@ Database Server, Message Queue Server and Developer SDKs and Tools Requirements 
       ```sh
       Update-Database
       ```
-  - Multiple startup projects should be set:
+  * Multiple startup projects should be set:
     - ChatRoom.ChatBot
     - ChatRoomWithBot
   - Or You can run from terminal:
+  ```sh
+  dotnet run
+  ```
+  
 ## Unit Tests
 
 For testing, You can run from Visual Studio or by terminal:
