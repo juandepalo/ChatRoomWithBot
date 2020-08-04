@@ -13,6 +13,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import { ChatRoomService } from './services/chatroom.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserManager, UserManagerSettings, User } from 'oidc-client';
 
 @NgModule({
   declarations: [

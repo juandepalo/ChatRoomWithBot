@@ -24,11 +24,11 @@ namespace ChatRoom.Application.Suscribers
         }
 
 
-        Task INotificationHandler<MessagePostedEvent>.Handle(MessagePostedEvent @notification, CancellationToken cancellationToken)
+        Task INotificationHandler<MessagePostedEvent>.Handle(MessagePostedEvent notification, CancellationToken cancellationToken)
         {
             _logger.LogInformation($" [x] Sent to SignalR: {notification.Message} from notification handler");
 
-            return _hubContext.Clients.All.SendAsync("Send", @notification, cancellationToken);
+            return _hubContext.Clients.All.SendAsync("Send", notification, cancellationToken);
         }
     }
 }
