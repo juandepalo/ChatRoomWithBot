@@ -1,11 +1,11 @@
-﻿using ChatRoom.ChatBot.Bots;
+﻿using ChatRoom.ChatBot.Domain.Bots;
 using ChatRoom.ChatBot.Domain;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChatRoom.ChatBot.Services
+namespace ChatRoom.ChatBot.Service
 {
     public class BotService
     {

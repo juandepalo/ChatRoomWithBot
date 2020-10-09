@@ -1,12 +1,8 @@
-﻿using ChatRoom.ChatBot.Domain;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
+﻿
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ChatRoom.ChatBot.Bots
+namespace ChatRoom.ChatBot.Domain.Bots
 {
     public class StockBot : IBotBase
     {

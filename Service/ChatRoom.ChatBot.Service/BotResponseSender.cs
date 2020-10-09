@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChatRoom.ChatBot.Services
+namespace ChatRoom.ChatBot.Service
 {
     public class BotResponseSender
     {

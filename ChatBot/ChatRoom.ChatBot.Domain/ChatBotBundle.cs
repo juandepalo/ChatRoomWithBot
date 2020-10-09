@@ -1,9 +1,9 @@
-﻿using ChatRoom.ChatBot.Bots;
+﻿using ChatRoom.ChatBot.Domain.Bots;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChatRoom.ChatBot
+namespace ChatRoom.ChatBot.Domain
 {
     public class ChatBotBundle
     {

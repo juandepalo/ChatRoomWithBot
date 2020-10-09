@@ -1,4 +1,4 @@
-using ChatRoom.ChatBot.Bots;
+using ChatRoom.ChatBot.Domain.Bots;
 using System;
 using Xunit;
 

@@ -1,5 +1,5 @@
 ﻿using ChatRoom.ChatBot.Domain;
-using ChatRoom.ChatBot.Services;
+using ChatRoom.ChatBot.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

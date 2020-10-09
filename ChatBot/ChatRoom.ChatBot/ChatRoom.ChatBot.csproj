@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Service\ChatRoom.ChatBot.Service\ChatRoom.ChatBot.Service.csproj" />
     <ProjectReference Include="..\ChatRoom.ChatBot.Domain\ChatRoom.ChatBot.Domain.csproj" />
   </ItemGroup>
 
