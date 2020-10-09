@@ -15,6 +15,7 @@ export class ChatRoomComponent implements OnInit {
   public msgItem: ChatMessageModel;
   private _baseUrl: string;
   public currentDT: Date;
+  public chatLimit: number = 50;
 
   constructor(
     private http: HttpClient,
@@ -46,7 +47,10 @@ export class ChatRoomComponent implements OnInit {
 
     this.chatRoomService.messageReceived.subscribe((message: ChatMessageModel) => {
       this._ngZone.run(() => {
+
         this.chatMessages.push(message);
+
+        this.chatMessages = this.chatMessages.slice((-1) * this.chatLimit);
       });
     });
   }

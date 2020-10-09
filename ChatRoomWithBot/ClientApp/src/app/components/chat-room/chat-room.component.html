@@ -8,7 +8,7 @@
   <div class="messaging">
     <div class="inbox_msg">
       <div class="mesgs">
-        <div id="messages" class="msg_history">
+        <div #messages [scrollTop]="messages.scrollHeight" class="msg_history">
           <div *ngFor="let message of chatMessages ; let i = index">
             <div class="incoming_msg">
               <div class="incoming_msg_img"> </div>
