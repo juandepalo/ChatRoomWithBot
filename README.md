@@ -24,27 +24,33 @@ The front end was done in [Angular 8](https://angular.io/)
 | ChatRoom.Persistence | Data layer project | 
 | ChatRoom.ChatBot.Domain | Class Library for Chatbots related domain classes | 
 | ChatRoom.ChatBot | Console App for handling Bot events | 
-| ChatRoom.Test | Test Project |  
+| ChatRoom.XUnitTest | Test Project |  
 
 ### Requirements
 
   - [RabbitMQ](https://www.rabbitmq.com/install-windows.html) Server (Requires [ERLang/OTP](https://www.erlang.org/downloads))
   - [.NET Core 3.1](https://dotnet.microsoft.com/download)
-  - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+  - [LocalDB Feature](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb) or [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
   - [NodeJS 12](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
   - [Angular CLI](https://cli.angular.io/)
  
 ## Configuration
 
-Database Server, Message Queue Server and Developer SDKs and Tools Requirements should be installed before the following details. You can create [Docker](https://www.docker.com/products/docker-desktop) Images for a fast services setting up as following:
+Database Server, Message Queue Server and Developer SDKs and Tools Requirements should be installed before the next setting up section.
+Alternatively, You can create [Docker](https://www.docker.com/products/docker-desktop) images to deploy as following:
   - For SQL Server
   ```sh
-  docker pull mcr.microsoft.com/mssql/server
-  docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD={Your-Password}’ -p 1433:1433 -d --restart=always --name={Your-Server-Name} hostname={Your-Server-Name} mcr.microsoft.com/mssql/server:latest
+  $ docker pull mcr.microsoft.com/mssql/server
+  $ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD={Your-Password}’ -p 1433:1433 -d --restart=always --name={Your-Server-Name} hostname={Your-Server-Name} mcr.microsoft.com/mssql/server:latest
   ```
   - For Rabbit MQ
   ```sh
-  docker run -d --hostname {my-rabbit-name}  --name {my-rabbit-name} -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=guess -e RABBITMQ_DEFAULT_PASS=guess -e RABBITMQ_ERLANG_COOKIE='rabbitcookie' rabbitmq:3-management
+  $ docker run -d --hostname {my-rabbit-name}  --name {my-rabbit-name} -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=guess -e RABBITMQ_DEFAULT_PASS=guess -e RABBITMQ_ERLANG_COOKIE='rabbitcookie' rabbitmq:3-management
+  ```
+  - For the application
+  ```sh
+  $ docker build -t aspnetapp .
+  $ docker run -d -p 8080:80 --name myapp aspnetapp
   ```
 ### Settings Files
 
@@ -53,40 +59,40 @@ Database Server, Message Queue Server and Developer SDKs and Tools Requirements 
 
 ### Setup Application
 
-  * For _Database deployment_, you need to run migrations from data layer project directory:
-  
-    - From terminal:
+  * For _Database deployment_, you need to run migrations from data layer project directory to create the database:
+    - In Visual Studio, use the Package Manager Console to scaffold a new migration and apply it to the database:
+    ```sh
+    PM> Add-Migration [migration name] 
+    PM> Update-Database
+    ```
+    - Alternatively, you can scaffold a new migration and apply it from a command prompt at your project directory:
       ```sh
-      cd {ChatRoom.Persistence folder}
-      dotnet ef database update
-      ```
-      
-    - From Package Manager Console:
-      ```sh
-      Update-Database
+      > cd {ChatRoom.Persistence folder}
+      > dotnet ef migrations add [migration name] 
+      > dotnet ef database update
       ```
       
   * For _dependencies downloads_, restore dotnet nuget pakages and install npm packages in command promt:
     ```sh
-    cd {Solution Source directory}
-    dotnet restore
-    cd {Angular ClientApp directory}
-    npm install
+    > cd {Solution Source directory}
+    > dotnet restore
+    > cd {Angular ClientApp directory}
+    > npm install
     ```
     
   * Multiple startup projects should be set:
     - ChatRoom.ChatBot
     - ChatRoomWithBot
   - Or You can run from terminal:
-  ```sh
-  dotnet run
-  ```
+    ```sh
+    > dotnet run
+    ```
   
 ## Unit Tests
 
 For testing, You can run from Visual Studio or by terminal:
 
 ```sh
-cd {test project folder}
-dotnet test
+> cd {test project folder}
+> dotnet test
 ```
