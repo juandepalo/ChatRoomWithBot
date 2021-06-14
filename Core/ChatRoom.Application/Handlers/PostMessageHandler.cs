@@ -13,7 +13,6 @@ using ChatRoom.Application.Events;
 using ChatRoom.Application.Extensions;
 using ChatRoom.Application.Interfaces;
 using ChatRoom.Application.ViewModels;
-using ChatRoom.ChatBot.Domain;
 using ChatRoom.Domain;
 using ChatRoom.Application.Commands;
 using Microsoft.Extensions.Logging;

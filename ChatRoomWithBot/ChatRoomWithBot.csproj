@@ -51,7 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\ChatRoom.ComService\ChatRoom.ComService.csproj" />
     <ProjectReference Include="..\Data\ChatRoom.Persistence\ChatRoom.Persistence.csproj" />
     <ProjectReference Include="..\Service\ChatRoom.ComService\ChatRoom.ComService.csproj" />
   </ItemGroup>
